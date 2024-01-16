@@ -1,0 +1,44 @@
+---
+project:
+  type: website
+  output-dir: docs
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+
+## RPNeg
+
+### MSMS  RPNeg
+```{r}
+library(tidyverse)
+library(dplyr)
+library(DT)
+# read MSMS data RPNEG
+rp_neg_msms<-read.table("/Users/amnahsiddiqa/Documents/CCHMC_Projects/MIA_RP/scripts/mona_mbank_annotations_rpneg.tsv", sep="\t", header = TRUE)
+head(rp_neg_msms)
+colnames(rp_neg_msms)[1]<-"FID"
+
+rpneg_stats_results_allsamples<-read.table("/Users/amnahsiddiqa/Documents/CCHMC_Projects/MIA_RP/rpneg_allsamples.txt", sep="\t", header=TRUE)
+
+head(rpneg_stats_results_allsamples)
+msms_ions_in_allsamples<-rpneg_stats_results_allsamples%>%dplyr::filter(FID%in%rp_neg_msms$FID & P_Value < 0.05)
+datatable(rpneg_stats_results_allsamples, filter = 'top', rownames = F)
+
+
+
+```
+
+
+```{r}
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+ggplot (mpg, aes (x = hwy, y = cty, color = cyl)) +
+geom_point (alpha = 0.5, size = 2)
+scale_color_viridis_c()
+theme_minimal ()
+```
